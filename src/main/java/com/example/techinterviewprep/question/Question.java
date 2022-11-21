@@ -1,5 +1,6 @@
 package com.example.techinterviewprep.question;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 
 @Getter
 @Builder
+@AllArgsConstructor
 @Entity
 public class Question {
 
@@ -19,4 +21,8 @@ public class Question {
 
     private String title;
     private String type;
+
+    public Question() {
+        /*no option*/
+    }
 }
