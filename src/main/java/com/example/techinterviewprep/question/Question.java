@@ -1,5 +1,6 @@
 package com.example.techinterviewprep.question;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Getter
+@Builder
 @Entity
 public class Question {
 
