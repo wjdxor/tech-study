@@ -37,3 +37,4 @@ out/
 .vscode/
 
 .github/workflows/devlopintegration.yml
+src/main/resources/application.yml
