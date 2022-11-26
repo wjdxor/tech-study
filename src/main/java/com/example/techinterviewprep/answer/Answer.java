@@ -1,6 +1,7 @@
 package com.example.techinterviewprep.answer;
 
 import com.example.techinterviewprep.question.Question;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

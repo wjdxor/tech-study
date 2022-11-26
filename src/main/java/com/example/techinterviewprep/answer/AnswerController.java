@@ -20,18 +20,18 @@ public class AnswerController {
     }
 
     @PostMapping
-    public ResponseEntity<Answer> createAnswer(@RequestBody Answer answer) {
-        Answer saved = answerService.createAnswer(answer);
+    public ResponseEntity<?> createAnswer(@RequestBody AnswerDTO answerDTO) {
+        AnswerDTO saved = answerService.createAnswer(answerDTO);
         return ResponseEntity.ok(saved);
     }
 
     @GetMapping
-    public ResponseEntity<List<Answer>> findAll() {
+    public ResponseEntity<List<?>> findAll() {
         return ResponseEntity.ok(answerService.findAll());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Answer> findOne(@PathVariable Long id) {
+    public ResponseEntity<?> findOne(@PathVariable Long id) {
         return ResponseEntity.ok(answerService.findOne(id));
     }
 }

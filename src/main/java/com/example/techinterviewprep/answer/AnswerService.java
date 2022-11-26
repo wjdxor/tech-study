@@ -5,7 +5,7 @@ import com.example.techinterviewprep.question.QuestionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AnswerService {
@@ -17,24 +17,26 @@ public class AnswerService {
         this.questionRepository = questionRepository;
     }
 
-    public Answer createAnswer(Answer answer) {
-        Question question = questionRepository.findById(answer.getId()).orElseThrow(
+    public AnswerDTO createAnswer(AnswerDTO answerDTO) {
+        Question question = questionRepository.findById(answerDTO.getQuestionId()).orElseThrow(
             () -> new IllegalArgumentException("문제가 올바르지 않습니다.")
         );
+        Answer save = Answer.builder().content(answerDTO.getContent()).question(question).build();
+        answerRepository.save(save);
 
-        return Answer.builder()
-            .question(question)
-            .content(answer.getContent())
-            .build();
+        return AnswerDTO.builder().id(save.getId()).build();
     }
 
-    public Answer findOne(Long id) {
-        return answerRepository.findById(id).orElseThrow(
+    public AnswerDTO findOne(Long id) {
+        Answer answer = answerRepository.findById(id).orElseThrow(
             () -> new IllegalArgumentException("답변이 없습니다.")
         );
+        return AnswerDTO.builder().content(answer.getContent()).questionId(answer.getQuestion().getId()).build();
     }
 
-    public List<Answer> findAll() {
-        return answerRepository.findAll();
+    public List<AnswerDTO> findAll() {
+        return answerRepository.findAll().stream().map(
+            x -> AnswerDTO.builder().id(x.getId()).content(x.getContent()).questionId(x.getQuestion().getId()).build()
+        ).collect(Collectors.toList());
     }
 }
